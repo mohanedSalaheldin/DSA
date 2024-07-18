@@ -1,10 +1,10 @@
 import java.io.*;
 import java.net.*;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
-public class RandomNumberServer {
+
+
+public class RanNumsServer {
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(12345)) {
             System.out.println("Server is listening on port 12345");
@@ -17,9 +17,7 @@ public class RandomNumberServer {
                     int count = input.readInt();
                     int min = input.readInt();
                     int max = input.readInt();
-
                     Set<Integer> randomNumbers = generateRandomNumbers(count, min, max);
-
                     output.writeInt(randomNumbers.size());
                     for (int number : randomNumbers) {
                         output.writeInt(number);
