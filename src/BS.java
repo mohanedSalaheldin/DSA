@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class BS {
     public static int search(int[] nums, int target) {
         int n = nums.length;
@@ -42,10 +45,35 @@ public class BS {
         }
         return  min;
     }
-    public static void main(String[] args) {
-        int[] arr = new int[] {4,5,6,6,7,1,2,4,4};
-        int re = findMin(arr);
-        System.out.println(re);
 
+    public static int findKRotation(List<Integer> arr) {
+        int low = 0;
+        int high = arr.size()-1;
+        int k = 0;
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(arr.get(k) > arr.get(mid)){
+                k = mid;
+            }
+            if(arr.get(mid) >= arr.get(low)){
+                if(arr.get(k) > arr.get(low)){
+                    k = low;
+                }
+                low = mid + 1;
+            }else{
+                if(arr.get(k) > arr.get(high)){
+                    k = high;
+                }
+                high = mid - 1;
+            }
+        }
+        return k;
     }
+//    public static void main(String[] args) {
+//        int[] arr = {5,6,6,7,1,2,4};
+//
+//        int re = findKRotation(Arrays.asList(arr));
+//        System.out.println(re);
+//
+//    }
 }
