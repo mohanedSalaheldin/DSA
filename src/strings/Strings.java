@@ -61,10 +61,36 @@ public class Strings {
         }
         return arr;
     }
+    public static String reverseWords(String s) {
 
+        String[] words = s.trim().split(" ");
+//        for (int i = 0; i < words.length; i++) {
+//            System.out.println(words[i]);
+//        }
+        int n = words.length;
+//        System.out.println(n);
+        StringBuilder sBuilder = new StringBuilder();
+        for (int i = n-1; i >=0 ; i--) {
+            if (words[i] != null && !words[i].trim().isEmpty()) {
+                sBuilder.append(" ").append(words[i]);
+            }
+        }
+        s = sBuilder.toString();
+        return  s.trim();
+
+    }
+
+    public static String largestOddNumber(String num) {
+        for(int i = num.length()-1; i >=0; i--) {
+            if (Character.getNumericValue(num.charAt(i))%2 ==1) {
+                return   num.substring(0, i+1);
+            }
+        }
+        return "";
+    }
     public static void main(String[] args) {
         String s = "(()())(())";
         String[] arr = {"hello","i","am","leetcode","hello"};
-        System.out.println(closetTarget(arr, "hello", 1));
+        System.out.println(largestOddNumber("38"));
     }
 }
