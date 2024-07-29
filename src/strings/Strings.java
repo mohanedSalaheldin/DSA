@@ -1,5 +1,7 @@
 package strings;
 
+import java.util.Arrays;
+
 public class Strings {
 
     public static String removeOuterParentheses(String s) {
@@ -88,9 +90,52 @@ public class Strings {
         }
         return "";
     }
+
+    public static String longestCommonPrefix(String[] strs) {
+        StringBuilder res = new StringBuilder();
+        Arrays.sort(strs);
+        String first = strs[0];
+        String last = strs[strs.length-1];
+        for (int i = 0; i < Math.min(first.length(), last.length()); i++) {
+            if (first.charAt(i)!= last.charAt(i)){
+                return res.toString();
+            }
+            res.append(first.charAt(i));
+        }
+        return  res.toString();
+    }
+    public static int missingInteger(int[] nums) {
+        int n = nums.length;
+        // find the sum of the sequence
+        int prev = 0;
+        int sum = nums[prev];
+        for (int i = 1; i < n; i++) {
+            if (nums[prev]+1 == nums[i]){
+                sum+=nums[i];
+            }else {
+                break;
+            }
+            prev++;
+        }
+        System.out.println(prev);
+        System.out.println(sum);
+        //search for the missing form prev + 1
+        int missedMin = sum;
+        Arrays.sort(nums, prev+1, n);
+        for (int i = prev+1 ; i < n; i++) {
+            if (nums[i] == missedMin){
+                missedMin++;
+            }
+        }
+        System.out.println(missedMin);
+        if (sum == nums[0]) return sum+1;
+        return missedMin;
+
+    }
     public static void main(String[] args) {
         String s = "(()())(())";
-        String[] arr = {"hello","i","am","leetcode","hello"};
-        System.out.println(largestOddNumber("38"));
+        int[] arr = {1,3, 2,3,2,5};
+//        int[] arr = {3,4,5,1,12,14,13};
+        System.out.println(missingInteger(arr));
     }
 }
