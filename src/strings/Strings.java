@@ -1,6 +1,8 @@
 package strings;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Strings {
 
@@ -132,10 +134,37 @@ public class Strings {
         return missedMin;
 
     }
+
+    public static boolean rotateString(String s, String goal) {
+        int n = s.length();
+        StringBuilder res = new StringBuilder(s);
+        for (int i = 1; i < n; i++) {
+            char begin = res.charAt(0);
+            String temp = res.substring(1,n);
+            res.replace(0,n-1, temp);
+            res.deleteCharAt(n-1);
+            res.append(begin);
+            if (goal.equals(res.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static String frequencySort(String s) {
+        int n = s.length();
+        Map<Character, Integer> freqs = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            freqs.put(s.charAt(i), freqs.getOrDefault(s.charAt(i), 0)+1 );
+        }
+        freqs.keySet()
+        System.out.println(freqs);
+        return "";
+    }
     public static void main(String[] args) {
         String s = "(()())(())";
         int[] arr = {1,3, 2,3,2,5};
 //        int[] arr = {3,4,5,1,12,14,13};
-        System.out.println(missingInteger(arr));
+        System.out.println(frequencySort("tree"));
     }
 }
