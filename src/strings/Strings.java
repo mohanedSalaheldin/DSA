@@ -157,7 +157,7 @@ public class Strings {
         for (int i = 0; i < n; i++) {
             freqs.put(s.charAt(i), freqs.getOrDefault(s.charAt(i), 0)+1 );
         }
-        freqs.keySet()
+        freqs.keySet();
         System.out.println(freqs);
         return "";
     }
