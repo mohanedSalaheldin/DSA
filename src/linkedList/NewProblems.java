@@ -1,5 +1,8 @@
 package linkedList;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class NewProblems {
     public ListNode middleNode(ListNode head) {
         if(head==null || head.next==null) return head;
@@ -31,30 +34,40 @@ public class NewProblems {
 
     }
 
-    public static void printList(Node head) {
-        Node current = head;
+    public static void printList(ListNode head) {
+        ListNode current = head;
         while (current != null) {
-            System.out.print(current.data + " -> ");
+            System.out.print(current.val + " -> ");
             current = current.next;
         }
         System.out.print("null \n");
     }
     public static void main(String[] args) {
-        Node newNode = new Node(1, null);
-        Node head = new Node(1, null);
-        head.next = new Node(2, null);
-        head.next.next = new Node(3, null);
+        ListNode newNode = new ListNode(1, null);
+        ListNode head = new ListNode(1, null);
+        head.next = new ListNode(2, null);
+        head.next.next = new ListNode(3, null);
         printList(head);
-        Node cur = head.next;
-        Node prev = head;
-        while( cur.next !=null){
-            cur.data = cur.next.data;
-            prev = cur;
-            cur = cur.next;
+        ListNode cur = head.next;
+        detectCycle(head);
+
+    }
+
+    public static ListNode detectCycle(ListNode head) {
+        Map<Integer, Integer> hp = new HashMap<>();
+        ListNode cur = head;
+        int index = 0;
+        while (cur!=null){
+            System.out.println(cur.val);
+            if (hp.containsValue(cur.val)){
+                return cur;
+            }else{
+                hp.put(index, cur.val);
+                index++;
+                cur = cur.next;
+            }
         }
-        System.out.println(prev.next);
-        prev .next = null;
-        printList(head);
+        return null;
     }
 
 
