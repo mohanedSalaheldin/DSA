@@ -1,8 +1,6 @@
 package linkedList;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class NewProblems {
     public ListNode middleNode(ListNode head) {
@@ -54,6 +52,23 @@ public class NewProblems {
 
     }
 
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode slow = head;
+        ListNode fast = head;
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+        if (fast == null) {
+            return head.next;
+        }
+        while(fast.next!=null){
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        slow.next = slow.next.next;
+        return  head;
+    }
     public ListNode findMiddle(ListNode head) {
         if(head==null || head.next==null) return null;
         ListNode slow = head;
@@ -91,23 +106,21 @@ public class NewProblems {
         }
         return true;
     }
-
     public ListNode oddEvenList(ListNode head) {
-        if(head==null || head.next==null) return null;
-        ListNode currentOddNode = head;
-        ListNode newOddNode = head;
-        ListNode prevToNewOddNode = head;
-        while (currentOddNode!=null && currentOddNode.next!=null){
-            newOddNode = currentOddNode.next.next;
-            prevToNewOddNode = currentOddNode.next;
-            ListNode tempCur = currentOddNode;
-            tempCur.next = newOddNode;
-            prevToNewOddNode.next = newOddNode.next;
-            newOddNode.next = prevToNewOddNode;
-            currentOddNode = currentOddNode.next.next;
+        if(head==null || head.next==null) return head;
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = head.next;
+        while (even!=null && even.next!=null){
+            odd.next = odd.next.next;
+            odd = odd.next;
+            even.next = even.next.next;
+            even = even.next;
         }
+        odd.next = evenHead;
         return  head;
     }
+
     public static ListNode detectCycle(ListNode head) {
         Map<Integer, Integer> hp = new HashMap<>();
         ListNode cur = head;
