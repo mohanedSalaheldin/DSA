@@ -69,27 +69,8 @@ public class NewProblems {
         slow.next = slow.next.next;
         return  head;
     }
-    public ListNode findMiddle(ListNode head) {
-        if(head==null || head.next==null) return null;
-        ListNode slow = head;
-        ListNode fast = head;
-        while(fast.next!=null && fast.next.next!=null){
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        return slow;
-    }
-    public ListNode reverseList(ListNode head) {
-        ListNode cur = head;
-        ListNode prev = null;
-        while(cur!=null){
-            ListNode next = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = next;
-        }
-        return prev;
-    }
+
+
     public boolean isPalindrome(ListNode head) {
         if(head==null || head.next==null) return false;
         ListNode mid = findMiddle(head);
@@ -121,6 +102,52 @@ public class NewProblems {
         return  head;
     }
 
+    //*********************************************************************************
+    public static ListNode findMiddle(ListNode head) {
+        if(head==null || head.next==null) return head;
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while(fast.next!=null && fast.next.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+
+    }
+
+    public  static ListNode merge(ListNode head1, ListNode head2) {
+         ListNode dNode = new ListNode(-1);
+         ListNode temp = dNode;
+         ListNode t1 = head1;
+         ListNode t2 = head2;
+         while (t1!=null || t2!=null){
+             if (t1.val < t2.val){
+                 temp.next = t1;
+                 t1= t1.next;
+             }else {
+                 temp.next = t2;
+                 t2= t2.next;
+             }
+             temp = temp.next;
+         }
+         if (t1!=null){
+             temp.next = t1;
+         }if (t2!=null){
+            temp.next = t2;
+        }
+
+        return  dNode.next;
+    }
+
+    public  static ListNode sortList(ListNode head) {
+        ListNode mid = findMiddle(head);
+        ListNode head2 = mid.next;
+        mid.next = null;
+        ListNode head1 = head;
+        head1 = sortList(head1);
+        head2 = sortList(head2);
+        return merge(head1, head2);
+    }
     public static ListNode detectCycle(ListNode head) {
         Map<Integer, Integer> hp = new HashMap<>();
         ListNode cur = head;
@@ -138,6 +165,45 @@ public class NewProblems {
         return null;
     }
 
+    public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode temp1 = headA;
+        List<ListNode> listNodes = new ArrayList<>();
+        while (temp1!=null){
+            listNodes.add(temp1);
+            temp1= temp1.next;
+        }
+        temp1 = headB;
+        while (temp1!=null){
+            if (listNodes.contains(temp1)){
+                return temp1;
+            }
+            temp1= temp1.next;
+        }
+        return null;
+    }
 
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode();
+        int curry = 0;
+        l1 = reverseList(l1);
+        l2 = reverseList(l2);
+        ListNode t1 = l1;
+        ListNode t2 = l2;
+        while (t1!=null || t2!=null){
+            
+        }
+        return res;
+    }
+    public static ListNode reverseList(ListNode head) {
+        ListNode cur = head;
+        ListNode prev = null;
+        while(cur!=null){
+            ListNode next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    }
 
 }
