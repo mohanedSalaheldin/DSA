@@ -181,19 +181,36 @@ public class NewProblems {
         }
         return null;
     }
+    public static Node segregate(Node head) {
+        Node dZero = new Node(-1);
+        Node dOne = new Node(-1);
+        Node dTwo = new Node(-1);
+        Node l0 = dZero;
+        Node l1 = dOne;
+        Node l2 = dTwo;
+        Node temp = head;
 
-    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode res = new ListNode();
-        int curry = 0;
-        l1 = reverseList(l1);
-        l2 = reverseList(l2);
-        ListNode t1 = l1;
-        ListNode t2 = l2;
-        while (t1!=null || t2!=null){
-            
+        while (temp!=null){
+            if (temp.data==0){
+                l0.next = temp;
+                l0 = l0.next;
+            } else if (temp.data == 1){
+                l1.next = temp;
+                l1 = l1.next;
+            }else{
+                l2.next = temp;
+                l2 = l2.next;
+            }
+            temp= temp.next;
         }
-        return res;
+
+        l0.next = dOne.next!=null ? dOne.next : dTwo.next;
+        l1.next = dTwo.next;
+        l2.next = null;
+
+        return dOne.next;
     }
+
     public static ListNode reverseList(ListNode head) {
         ListNode cur = head;
         ListNode prev = null;
@@ -206,4 +223,47 @@ public class NewProblems {
         return prev;
     }
 
+    public static int additionHelper(Node temp){
+        if (temp == null)
+            return 1;
+        int curry = additionHelper(temp.next);
+        temp.data = temp.data + 1;
+        if (temp.data < 10)
+            return 0;
+        temp.data = 0;
+        return 1;
+    }
+    public static Node addOne(Node head) {
+        int curry = additionHelper(head);
+        if (curry == 1){
+            Node newNode = new Node(1);
+            newNode.next = head;
+            return newNode;
+        }
+        return head;
+    }
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode t1 = l1;
+        ListNode t2 = l2;
+        ListNode dommy = new ListNode(-1);
+        ListNode cur = dommy;
+
+        int curry = 0;
+        while (t1!=null || t2!=null){
+            int sum = 0;
+            if (t1 != null) {
+                sum += t1.val ;
+                t1 = t1.next;
+            }
+            if (t2 != null) {
+                sum += t2.val ;
+                t2 = t2.next;
+            }
+            sum+=curry;
+            curry = sum/10;
+            cur.next = new ListNode(sum%10);
+            cur = cur.next;
+        }
+        return  dommy.next;
+    }
 }

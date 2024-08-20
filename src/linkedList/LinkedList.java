@@ -5,7 +5,7 @@ public class LinkedList {
     Node head;
 
     public LinkedList(int headData) {
-        this.head = new Node(headData, null);
+        this.head = new Node(headData);
     }
 
     public void addEnd(int newNodeData){
@@ -13,10 +13,10 @@ public class LinkedList {
         while (current.next !=null){
             current = current.next;
         }
-        current.next =  new Node(newNodeData, null);
+        current.next =  new Node(newNodeData);
     }
     public void addStart(int newNodeData){
-        Node newNode=  new Node(newNodeData, head);
+        Node newNode=  new Node(newNodeData);
         head = newNode;
     }
 
@@ -56,7 +56,7 @@ public class LinkedList {
         } else {
             while (current !=null){
                 if (targetData == current.data){
-                    Node newNode = new Node(newNodeData, current.next);
+                    Node newNode = new Node(newNodeData);
                     current.next = newNode;
                     break;
                 }
