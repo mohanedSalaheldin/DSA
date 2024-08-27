@@ -10,6 +10,44 @@ public class Sol {
 
     }
 
+    public int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        int[] nge = new int[n];
+        Stack<Integer> st = new Stack<>();
+        for (int i = 2*n-1; i >= 0; i--) {
+            while (!st.isEmpty() && st.peek() <= nums[i%n]){
+                st.pop();
+            }
+            if (i<n) {
+                nge[i%n] = st.isEmpty() ?-1: st.peek();
+            }
+            st.push(nums[i%n]);
+        }
+        return  nge;
+    }
+
+    public int trap(int[] height) {
+        int n = height.length;
+        int l = 0;
+        int r = n-1;
+        int lMax = height[l];
+        int rMax = height[r];
+        int trapWater = 0;
+        while (l<r){
+            if (height[l] < height[r]) {
+                l++;
+                lMax = Math.max(lMax, height[l]);
+                trapWater+= lMax - height[l];
+            }else {
+                r++;
+                rMax = Math.max(rMax, height[r]);
+                trapWater+= rMax - height[r];
+            }
+        }
+        return trapWater;
+    }
+
+
     private boolean isBulky(int length, int width, int height){
         int maxDimensions = 10000;
         long maxVolume = 1000000000;
