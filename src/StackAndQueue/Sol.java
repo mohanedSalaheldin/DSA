@@ -46,7 +46,9 @@ public class Sol {
         }
         return trapWater;
     }
+    public int[] dailyTemperatures(int[] temperatures) {
 
+    }
 
     private boolean isBulky(int length, int width, int height){
         int maxDimensions = 10000;

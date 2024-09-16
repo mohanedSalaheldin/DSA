@@ -1,3 +1,5 @@
+package impls;
+
 import java.util.Arrays;
 
 public class DynamicArray<T> {
@@ -51,7 +53,7 @@ public class DynamicArray<T> {
     @Override
     public String toString() {
 
-        return "DynamicArray{" +
+        return "impls.DynamicArray{" +
                 "arr=" + Arrays.toString(arr) +
                 '}';
     }
